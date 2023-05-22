@@ -291,21 +291,14 @@ packages:
   todo_models:
     dependency: "direct main"
     description:
-      path: "packages/todo_models"
-      relative: true
-    source: path
-    version: "1.0.0+1"
-  todo_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/todo_repository"
+      path: "../todo_models"
       relative: true
     source: path
     version: "1.0.0+1"
   todo_services:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      path: "packages/todo_services"
+      path: "../todo_services"
       relative: true
     source: path
     version: "1.0.0+1"
