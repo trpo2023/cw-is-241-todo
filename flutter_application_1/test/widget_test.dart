@@ -16,17 +16,17 @@ void main() {
     await tester.pumpWidget(TodoListApp());
 
     // Находим кнопку добавления задачи и нажимаем на нее
-    await tester.tap(find.byType(TextField));
+    await tester.tap(find.byIcon(Icons.add));
     await tester.pumpAndSettle();
 
     // Проверяем, что появился диалоговое окно
     expect(find.byType(AlertDialog), findsOneWidget);
 
     // Вводим текст в текстовое поле и нажимаем на кнопку "Add"
-    await tester.tap(find.byType(TextField).last);
+    await tester.tap(find.byType(TextField));
     await tester.pumpAndSettle();
 
-    await tester.enterText(find.byType(TextField).last, 'New Task');
+    await tester.enterText(find.byType(TextField), 'New Task');
     final textn = find.text('New Task');
     await tester.tap(find.text('Add'));
     await tester.pumpAndSettle();
@@ -40,12 +40,11 @@ void main() {
 
     // Создаем экземпляр нашего виджета
     await tester.pumpWidget(TodoListApp());
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
     await tester.tap(find.byType(TextField));
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(TextField).last);
-    await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).last, 'New Task');
-    //final textn = find.text('New Task');
+    await tester.enterText(find.byType(TextField), 'New Task');
     await tester.tap(find.text('Add'));
     await tester.pumpAndSettle();
 
@@ -71,18 +70,18 @@ void main() {
     testWidgets('Delete a task', (WidgetTester tester) async {
 
     await tester.pumpWidget(TodoListApp());
-
+    
     // Создаем экземпляр нашего виджета
     await tester.pumpWidget(TodoListApp());
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
     await tester.tap(find.byType(TextField));
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(TextField).last);
-    await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).last, 'New Task');
+    await tester.enterText(find.byType(TextField), 'New Task');
     final textn = find.text('New Task');
     await tester.tap(find.text('Add'));
     await tester.pumpAndSettle();
-
+    
     expect(textn, findsOneWidget);
 
     await tester.tap(find.byIcon(Icons.delete).first);
@@ -97,13 +96,13 @@ void main() {
 
     await tester.pumpWidget(TodoListApp());
 
-    // Создаем экземпляр нашего виджета
+     // Создаем экземпляр нашего виджета
     await tester.pumpWidget(TodoListApp());
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
     await tester.tap(find.byType(TextField));
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(TextField).last);
-    await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).last, 'New Task');
+    await tester.enterText(find.byType(TextField), 'New Task');
     final textn = find.text('New Task');
     await tester.tap(find.text('Add'));
     await tester.pumpAndSettle();
