@@ -140,7 +140,7 @@ packages:
     source: hosted
     version: "1.8.2"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: "3087813781ab814e4157b172f1a11c46be20179fcc9bea043e0fba36bc0acaa2"
@@ -225,7 +225,7 @@ packages:
     source: hosted
     version: "1.9.1"
   sqflite:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sqflite
       sha256: b4d6710e1200e96845747e37338ea8a819a12b51689a3bcf31eff0003b37a0b9
@@ -288,27 +288,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
-  todo_models:
-    dependency: "direct main"
-    description:
-      path: "packages/todo_models"
-      relative: true
-    source: path
-    version: "1.0.0+1"
-  todo_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/todo_repository"
-      relative: true
-    source: path
-    version: "1.0.0+1"
-  todo_services:
-    dependency: transitive
-    description:
-      path: "packages/todo_services"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   vector_math:
     dependency: transitive
     description:

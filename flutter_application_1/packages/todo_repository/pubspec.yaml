@@ -1,4 +1,4 @@
-name: flutter_application_1
+name: todo_repository
 description: A new Flutter project.
 
 publish_to: 'none' 
@@ -11,13 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  todo_models:
+    path: ../todo_models
+  todo_services:
+    path: ../todo_services
 
 
   cupertino_icons: ^1.0.2
-  todo_models:
-    path: packages/todo_models
-  todo_repository:
-    path: packages/todo_repository
 
 dev_dependencies:
   flutter_test:
