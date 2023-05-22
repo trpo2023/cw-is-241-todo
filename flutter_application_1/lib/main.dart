@@ -143,8 +143,8 @@ class _TodoListPageState extends State<TodoListPage> {
             decoration: InputDecoration(
               hintText: 'Enter a task',
             ),
-            onSubmitted: (value) {
-              _addTodoItem();
+            onTap: () {
+              _showAddTodoDialog();
             },
           ),
           Expanded(
