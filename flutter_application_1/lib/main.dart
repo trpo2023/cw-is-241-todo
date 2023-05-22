@@ -13,7 +13,7 @@ class TodoListApp extends StatelessWidget {
     return MaterialApp(
       title: 'Todo List',
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primarySwatch: Colors.indigo,
       ),
       home: TodoListPage(),
     );
@@ -26,21 +26,46 @@ class TodoListPage extends StatefulWidget {
 }
 
 class _TodoListPageState extends State<TodoListPage> {
+  var count = 0;
   final _textController = TextEditingController();
   final _items = <String>[];
 
-  void _addTodoItem() {
-    setState(() {
-      final todoItem = _textController.text;
-      if (todoItem.isNotEmpty) {
-        final todo = TodoModel(
-          id: 1,
-          title: todoItem,
+  void _showAddTodoDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        final TextEditingController controller = TextEditingController();
+        return AlertDialog(
+          title: Text('Add a task'),
+          content: TextField(
+            controller: controller,
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: Text('Add'),
+              onPressed: () {
+                final newTodo = controller.text;
+                if (newTodo.isNotEmpty) {
+                  setState(() {
+                    final todo = TodoModel(
+                      id: count = count + 1,
+                      title: newTodo,
+                    );
+                    TodoRepository().addTodo(todo);
+                    _textController.clear();
+                  });
+                }
+                Navigator.pop(context);
+              },
+            ),
+          ],
         );
-        TodoRepository().addTodo(todo);
-        _textController.clear();
-      }
-    });
+      },
+    );
   }
 
   void _removeTodoItem(int id) {
@@ -49,10 +74,10 @@ class _TodoListPageState extends State<TodoListPage> {
     });
   }
 
-  void _editTodoItem(String newValue, int index) {
+  void _editTodoItem(String newValue, int index, int itemid) {
     setState(() {
       final todo = TodoModel(
-        id: 1,
+        id: itemid,
         title: newValue,
       );
       TodoRepository().editTodo(todo);
@@ -89,7 +114,7 @@ class _TodoListPageState extends State<TodoListPage> {
                         TextButton(
                           child: Text('Save'),
                           onPressed: () {
-                            _editTodoItem(controller.text, index);
+                            _editTodoItem(controller.text, index, id);
                             Navigator.pop(context);
                           },
                         ),
@@ -146,19 +171,14 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
       body: Column(
         children: <Widget>[
-          TextField(
-            controller: _textController,
-            decoration: InputDecoration(
-              hintText: 'Enter a task',
-            ),
-            onSubmitted: (value) {
-              _addTodoItem();
-            },
-          ),
           Expanded(
             child: _buildTodoList(),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddTodoDialog,
+        child: const Icon(Icons.add),
       ),
     );
   }
