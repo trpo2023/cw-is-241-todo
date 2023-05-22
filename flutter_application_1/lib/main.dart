@@ -26,14 +26,37 @@ class _TodoListPageState extends State<TodoListPage> {
   final _textController = TextEditingController();
   final _items = <String>[];
 
-  void _addTodoItem() {
-    setState(() {
-      final todoItem = _textController.text;
-      if (todoItem.isNotEmpty) {
-        _items.add(todoItem);
-        _textController.clear();
-      }
-    });
+    void _showAddTodoDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        final TextEditingController controller = TextEditingController();
+        return AlertDialog(
+          title: Text('Add a task'),
+          content: TextField(
+            controller: controller,
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: Text('Add'),
+              onPressed: () {
+                final newTodo = controller.text;
+                if (newTodo.isNotEmpty) {
+                  setState(() {
+                    _items.add(newTodo);
+                  });
+                }
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _removeTodoItem(int index) {
