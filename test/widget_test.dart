@@ -22,6 +22,5 @@ void main() {
       await tester.pumpWidget(MaterialApp(home: TodoListPage()));
       expect(find.byIcon(Icons.add), findsOneWidget);
     });
-  })
-    
+  });
 }
